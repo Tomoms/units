@@ -14,7 +14,7 @@ class OrdineAlfabetico {
 	  
       String[] input = inputData();
 	  
-	  //TESTING: view "myArray"
+	  // TESTING: print "myArray"
 	  System.out.println("INPUT: "+ Arrays.toString(input));
 	  
 	  
@@ -24,25 +24,25 @@ class OrdineAlfabetico {
   
    private static String[] inputData(){
 	   
-      ArrayList<String> input = new ArrayList<String>(); //create an ArrayList
+      ArrayList<String> input = new ArrayList<String>(); // create an ArrayList
       Scanner sc = new Scanner(System.in); // create a Scanner
 	  
       int count = -1;
 
         do {
-          System.out.println("Enter a alphanumeric word:");
+          System.out.println("Enter an alphanumeric string:");
           String data = sc.nextLine();
 		  
-		  data = clean(data); //clean data
+		  data = clean(data); // clean data
 		  
-          input.add(data); //add data to ArrayList
+          input.add(data); // add data to ArrayList
 		  
           count++;
       } while (!input.get(count).equals(""));
 
-      String[] myArray = input.toArray(new String[0]); //copy the ArrayList in to a new Array "myArray"
+      String[] myArray = input.toArray(new String[0]); // copy the ArrayList into a new Array called "myArray"
 	  
-      myArray = Arrays.copyOf(myArray, myArray.length - 1); //remove the last cell from "myArray"
+      myArray = Arrays.copyOf(myArray, myArray.length - 1); // remove the last cell from "myArray"
 	  
       return myArray;
 	}
