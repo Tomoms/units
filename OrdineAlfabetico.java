@@ -19,8 +19,12 @@ class OrdineAlfabetico {
 		// TESTING: print "myArray"
 		System.out.println("INPUT: "+ Arrays.toString(input));
 	  
+	  
+		String[] orderedData = insertionSort(input);
+		
+		
 		//TESTING
-		System.out.println("OUTPUT: "+Arrays.toString(insertionSort(input)));
+		System.out.println("OUTPUT: "+Arrays.toString(capitalizeOutput(orderedData)));
 	  
 	}
 
@@ -107,6 +111,18 @@ class OrdineAlfabetico {
 		return arg;
 		
 	}
+	
+	private static String[] capitalizeOutput (String[] args) {
+		
+		for(int i=0 ; i<args.length ; i++) {
+			
+			args[i] = args[i].substring(0,1).toUpperCase() + args[i].substring(1);
+		}
+		
+		return args;
+	}
+	
+	
 		
 
 
