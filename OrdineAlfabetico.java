@@ -18,11 +18,9 @@ class OrdineAlfabetico {
 	  
 		// TESTING: print "myArray"
 		System.out.println("INPUT: "+ Arrays.toString(input));
-		
+	  
 		//TESTING
-		System.out.println(order2Strings(input[0], input[1]));
-	  
-	  
+		System.out.println("OUTPUT: "+Arrays.toString(insertionSort(input)));
 	  
 	}
 
@@ -82,7 +80,7 @@ class OrdineAlfabetico {
 			for (int i=0 ; i<minLength ; i++) {
 			
 				if(allChars.indexOf(s1.charAt(i)) < allChars.indexOf(s2.charAt(i))) return true;
-				else if (allChars.indexOf(s1.charAt(i)) < allChars.indexOf(s2.charAt(i))) return false;
+				if (allChars.indexOf(s1.charAt(i)) > allChars.indexOf(s2.charAt(i))) return false;
 			
 			}
 			
@@ -90,6 +88,25 @@ class OrdineAlfabetico {
 			else return false;
 		}
 		
+		
+		private static String[] insertionSort(String[] arg) {
+		
+		int i; 
+		String key;
+		
+		for( int j=1 ; j<arg.length ; j++) {
+			key = arg[j];
+			i = j-1;
+			
+			while(i>=0 && !order2Strings(arg[i], key)) {
+				arg[i+1] = arg[i];
+				i--;
+			}
+			arg[i+1] = key;
+		}
+		return arg;
+		
+	}
 		
 
 
