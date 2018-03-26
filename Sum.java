@@ -1,122 +1,160 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
 class Sum {
 	
 	public static void main (String[] args) {
 		
-		int[] arr = {-4, 5, 8, 10, 9};
-		int myVal = 4;
+		//INPUT
+		//int[] arr = {-4, 5, 8, 10, 9};
+		int[] arr = leggi();
 		
-		Contatore(arr);
+		//Integer myVal = 4;
+		Integer myVal = readVal();
+		System.out.println();
 		
 		
+		//PROCESSING
+		int[][] bin = Contatore(arr);
+		int[] risu = sums(bin, arr);
+		
+		
+		//OUTPUT
+		System.out.println(check(risu, myVal, bin, arr));
 		
 		
 	}
-/*
-	private static boolean combo(int[] list, int val) {
-		
-		int[] tmp = new int[list.length];
-		
-		for(int i=0 ; i<list.length ; i++) {
-			if(list[i]== val) return true;
-		}
-		
-		tmp[0] = list[0];
-		
-		for (int i=1 ; i<list.length ; i++) {
-			tmp[i] = list[i];
-			
-			System.out.println("Testing: "+sumArray(tmp));
-			if(sumArray(tmp) == val) return true;
-			tmp[i] =0;
-			
-			
-		}
-		
-		
-		
-		
-		return false;
+	
+	
+	public static int[] leggi( ){
+  
+		return leggiDato( 0 ); // lettura del primo dato e di tutti i successivi
 	}
-*/
+  
+	private static int[] leggiDato(int i){
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter a number:");
+  
+		String risp = sc.nextLine();
+      
+		if (risp.equals(""))
+			return new int[ i ];
 
-/*	
-	private static int sumArray (int[] list) {
-		int ris = list[0];
-		for(int i=1 ; i<list.length ; i++) {
-			ris = ris + list[i];
+		int dato = Integer.parseInt(risp); // il dato da inserire nella posizione 'i'
+		int[] dati = leggiDato( i+1 );
+
+		dati[ i ] = dato;
+              
+		return dati;
+
+	}
+
+	
+	private static Integer readVal() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter a value:");
+		
+		return sc.nextInt();
+		
+	}
+	
+	
+	public static int[][] Contatore(int[] list) {
+		
+		int lines = (int) Math.pow(2, list.length);
+
+		int[][] bin = new int[lines][list.length]; // create an array with other array which represent the combinations
+
+		for( int i = 1 ; i < lines ; i++ ){
+			
+			for(int j=0 ; j<list.length ; j++) {
+				bin[i][j] = inBinario( i, list.length).charAt(j) - '0'; // fill array
+			}
+		   
+		   
+		   
+		}
+	   
+		//TESTING:
+		//for(int[] i : bin) {
+		//	System.out.println(Arrays.toString(i));
+		//}
+		
+		
+		return bin;
+		
+	}
+	
+
+	//Convert n in binary notation using nBit space
+	public static String inBinario( int n, int nBit ){
+    
+		String accum = "" ;
+           
+		for( int m = n ; m != 0 ; m = m / 2 ) {
+			accum = m % 2 + accum ;
+		}
+			
+		int diff = nBit - accum.length();
+		if(diff >0) {
+			for (int i=0 ; i<diff ; i++) {
+				accum = "0"+accum;
+			}
+		} 
+
+		return n == 0 ? "0" : accum ;    
+    }
+	
+	
+	private static int[] sums (int[][] bin, int[]arr) {
+
+		int lines = (int)Math.pow(2, arr.length);
+		
+		int[] sums = new int[lines];
+		
+		for (int i=0 ; i<lines ; i++) {
+			sums[i] = sum2Arrays(bin[i],arr);
+		}
+		
+		
+		return sums;
+	}
+	
+	
+	private static int sum2Arrays (int[] combination, int[] arr) {
+		int ris = 0;
+		for(int i=0 ; i<arr.length ; i++) {
+			ris = ris + combination[i]*arr[i];
 		}
 		return ris;
 	}
-*/	
-
 	
-	    public static String inBinario( int n, int nBit ){
-    
-           String accum = "" ;
-           
-           for( int m = n ; m != 0 ; m = m / 2 )
+	
+	private static boolean check (int[] toCheck, Integer val, int[][] bin, int[] arr){
+		
+		String ris="";
+		
+		for(int i=0 ; i<toCheck.length ; i++) {
 
-               accum = m % 2 + accum ;
-			
-			int diff = nBit - accum.length();
-			if(diff >0) {
-				for (int i=0 ; i<diff ; i++) {
-					accum = "0"+accum;
+			if(val != null && toCheck[i] == val) {
+				
+				for(int j=0 ; j<arr.length ; j++) {
+					// bin[i][] //cordinate
+					if(arr[j]*bin[i][j] != 0 ) {
+						ris = ris + arr[j]*bin[i][j] +" + " ;
+					}
 				}
-			} 
-
-           return n == 0 ? "0" : accum ;    
-    }
-    
-// Il metodo che segue detrmina la nb-esima potenza del 2
-
-    public static int pot2( int nb ){
-    
-        int p ; // assumera` come valori le potenze del 2, cioe`: 1, 2, 4, 8,...
-                // fermandosi dopo 'nb' iterazioni
-    
-        for( p=1 ; nb > 0 ; nb = nb - 1 )
-        
-            p = 2 * p;
-            
-        return p;
-    
-    }
-
-	
-	
-	public static void Contatore(int[] list) {
-		
-		double righe = Math.pow(2, list.length);
-		int righec = (int)righe;
-		
-		
-		int[][] bin = new int[righec][list.length];
-		
-		
-
-       for( int i = 1 ; i < righec ; i = i + 1 ){
-       
-           System.out.println( inBinario( i, list.length) +" "+ i );
-		   
-		   for(int j=0 ; j<list.length ; j++) {
-			   bin[i][j] = inBinario( i, list.length).charAt(j)-'0';
-		   }
-		   
-		   
-		   
-       }
-	   
-	   for(int[] i : bin) {
-			System.out.println(Arrays.toString(i));
+				ris = ris.substring(0, ris.length()-2) + " = " + val;
+				
+				System.out.println(ris);
+				
+				return true;
+			}
 		}
 		
-		System.out.println();
-		
+		return false;
 	}
-	
 	
 	
 }
