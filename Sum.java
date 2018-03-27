@@ -20,7 +20,7 @@ class Sum {
 		
 		
 		//OUTPUT
-		System.out.println("Il numero" + (check(risu, myVal, bin, arr)? "":" non")+ " si può comporre");
+		System.out.println("Il numero" + (check(risu, myVal, bin, arr)? "":" non")+ " si puo comporre");
 		
 		
 	}
@@ -54,39 +54,28 @@ class Sum {
 
 	}
 	
-	private static boolean controlInt(Integer dato) {
-		//String allNum = "0123456789";
-		if (dato == null)
-			return false;
-		else
-			return true;
+	private static boolean control(String dato) {
+		String allNum = "0123456789";
+		for(int i=0 ; i<dato.length() ; i++) {
+			if(allNum.indexOf(dato.charAt(i)) == -1) return false;
+		}
+		
+		return true;
 	}
 
-       private static boolean control(String dato) {
-               String allNum = "0123456789";
-               for(int i=0 ; i<dato.length() ; i++) {
-                       if(allNum.indexOf(dato.charAt(i)) == -1) return false;
-               }
-               
-               return true;
-	}	
-
+	
 	private static Integer readVal() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter a value:");
-/*		String risp = "";
-		String r = "";
-*/
-		Integer val;
-
-		do {
-			val = sc.nextInt();
-
-		}while(!controlInt(val));
+		String risp = "";
 		
-
-
-		return val;
+		do {
+			risp = sc.nextLine();
+			
+		}while(!control(risp));
+		
+		
+		return Integer.parseInt(risp);
 		
 		
 	}
