@@ -6,7 +6,7 @@ class Sum {
 	public static void main (String[] args) {
 		
 		//INPUT
-		//int[] arr = {-4, 5, 8, 10, 9};
+		//int[] arr = {-2, -3,2,6};
 		int[] arr = leggi();
 		
 		//Integer myVal = 4;
@@ -55,7 +55,7 @@ class Sum {
 	}
 	
 	private static boolean control(String dato) {
-		String allNum = "0123456789";
+		String allNum = "-0123456789";
 		for(int i=0 ; i<dato.length() ; i++) {
 			if(allNum.indexOf(dato.charAt(i)) == -1) return false;
 		}
